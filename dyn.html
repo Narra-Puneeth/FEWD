@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>La Cucina Bella - Italian Restaurant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        function addToSelected(dishName, price) {
+            const selectedList = document.getElementById("selected-items");
+            const listItem = document.createElement("li");
+            listItem.className = "p-2 bg-gray-100 rounded mb-2";
+            listItem.textContent = `${dishName} - $${price}`;
+            selectedList.appendChild(listItem);
+        }
+
+        function clearSelected() {
+            document.getElementById("selected-items").innerHTML = "";
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <nav class="nav-menu p-4 mb-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 id="main-heading" class="restaurant-name text-3xl font-bold">La Cucina Bella - Italian Restaurant</h1>
+            <div class="space-x-6">
+                <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
+                <a href="#menu" class="text-gray-700 hover:text-gray-900">Menu</a>
+                <a href="/contact.html" class="text-gray-700 hover:text-gray-900">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4">
+        <section id="menu" class="menu-card bg-white p-6 mb-12">
+            <h2 class="text-2xl font-bold mb-4">Our Menu</h2>
+            <table class="w-full border-collapse">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="border p-3 text-left">Dish Name</th>
+                        <th class="border p-3 text-left">Price</th>
+                        <th class="border p-3 text-left">Description</th>
+                        <th class="border p-3 text-left">Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="menu-item">
+                        <td class="border p-3">Margherita Pizza</td>
+                        <td class="border p-3">16</td>
+                        <td class="border p-3">Fresh tomatoes, mozzarella, basil, and olive oil</td>
+                        <td class="border p-3"><button class="bg-green-500 text-white px-3 py-1 rounded" onclick="addToSelected('Margherita Pizza', 16)">Add</button></td>
+                    </tr>
+                    <tr class="menu-item">
+                        <td class="border p-3">Spaghetti Carbonara</td>
+                        <td class="border p-3">18</td>
+                        <td class="border p-3">Eggs, pecorino cheese, guanciale, and black pepper</td>
+                        <td class="border p-3"><button class="bg-green-500 text-white px-3 py-1 rounded" onclick="addToSelected('Spaghetti Carbonara', 18)">Add</button></td>
+                    </tr>
+                    <tr class="menu-item">
+                        <td class="border p-3">Osso Buco</td>
+                        <td class="border p-3">32</td>
+                        <td class="border p-3">Braised veal shanks with gremolata and saffron risotto</td>
+                        <td class="border p-3"><button class="bg-green-500 text-white px-3 py-1 rounded" onclick="addToSelected('Osso Buco', 32)">Add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="menu-card bg-white p-6 mb-12">
+            <h2 class="text-2xl font-bold mb-4">Selected Items</h2>
+            <ul id="selected-items" class="list-none mb-4"></ul>
+            <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="clearSelected()">Clear</button>
+        </section>
+
+        <section id="contact" class="menu-card bg-white p-6">
+            <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+            <p class="mb-2">Phone: 123456789</p>
+            <p class="mb-2">Email: puneeth@example.com</p>
+            <p>Address: 123 abc</p>
+        </section>
+    </div>
+</body>
+</html>
