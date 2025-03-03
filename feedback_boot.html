@@ -10,47 +10,100 @@
     <div class="container mt-5">
         <div class="card p-4 shadow-lg">
             <h2 class="text-center">Feedback Form</h2>
-            <form>
+            <form id="feedbackForm">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name (Optional)</label>
+                    <label for="name" class="form-label">Name</label>
                     <input type="text" id="name" name="name" class="form-control">
+                    <div class="text-danger d-none" id="nameError">Name cannot be empty.</div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email (Optional)</label>
-                    <input type="email" id="email" name="email" class="form-control">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                    <div class="text-danger d-none" id="emailError">Please enter a valid email address.</div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Phone (Optional)</label>
-                    <input type="tel" id="phone" name="phone" class="form-control">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                    <div class="text-danger d-none" id="phoneError">Please enter a valid 10-digit phone number.</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="rating" class="form-label">Rating</label>
                     <select id="rating" name="rating" class="form-select" required>
+                        <option value="">Select a rating</option>
                         <option value="5">5 - Excellent</option>
                         <option value="4">4 - Very Good</option>
                         <option value="3">3 - Good</option>
                         <option value="2">2 - Fair</option>
                         <option value="1">1 - Poor</option>
                     </select>
+                    <div class="text-danger d-none" id="ratingError">Please select a rating.</div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="questions" class="form-label">Any Questions regarding product or service</label>
-                    <textarea id="questions" name="questions" rows="3" class="form-control"></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label for="comments" class="form-label">Additional Comments (Optional)</label>
-                    <textarea id="comments" name="comments" rows="3" class="form-control"></textarea>
+                    <label for="questions" class="form-label">Any Questions</label>
+                    <textarea id="questions" name="questions" rows="3" class="form-control" required></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
         </div>
+        <div class="alert alert-success mt-3 text-center d-none" id="thankYouMessage">
+            Thank you for your feedback!
+        </div>
     </div>
+    <script>
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            let name = document.getElementById("name").value.trim();
+            let nameError = document.getElementById("nameError");
+            if (!name) {
+                nameError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                nameError.classList.add("d-none");
+            }
+
+            let email = document.getElementById("email").value.trim();
+            let emailError = document.getElementById("emailError");
+            if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+                emailError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                emailError.classList.add("d-none");
+            }
+
+            let phone = document.getElementById("phone").value.trim();
+            let phoneError = document.getElementById("phoneError");
+            if (phone && !/^\d{10}$/.test(phone)) {
+                phoneError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                phoneError.classList.add("d-none");
+            }
+
+            let rating = document.getElementById("rating").value;
+            let ratingError = document.getElementById("ratingError");
+            if (!rating) {
+                ratingError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                ratingError.classList.add("d-none");
+            }
+
+            if (isValid) {
+                document.getElementById("feedbackForm").reset();
+                document.getElementById("thankYouMessage").classList.remove("d-none");
+                setTimeout(() => {
+                    document.getElementById("thankYouMessage").classList.add("d-none");
+                }, 3000);
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
